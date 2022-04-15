@@ -39,8 +39,6 @@ def pregunta_01():
     y_untagged = ____["____"]
 
     # Retorne los grupos de mensajes
-
-    fjlfjlfjlf
     return x_tagged, y_tagged, x_untagged, y_untagged
 
 
