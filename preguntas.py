@@ -92,10 +92,13 @@ def pregunta_04():
     # Importe GridSearchCV
     # Importe Pipeline
     # Importe BernoulliNB
-    from ____ import ____
+    from sklearn.feature_extraction.text import CountVectorizer
+    from sklearn.model_selection import GridSearchCV
+    from sklearn.pipeline import Pipeline
+    from sklearn.naive_bayes import BernoulliNB
 
     # Cargue las variables.
-    x_train, _, y_train, _ = pregunta_02()
+    x_train, _, y_train, x_test, y_test = pregunta_02()
 
     # Obtenga el analizador de la pregunta 3.
     analyzer = pregunta_03()
@@ -105,18 +108,18 @@ def pregunta_04():
     # límite superior para la frecuencia de palabras es del 100% y un límite
     # inferior de 5 palabras. Solo deben analizarse palabras conformadas por
     # letras.
-    countVectorizer = ____(
-        analyzer=____,
-        lowercase=____,
-        stop_words=____,
-        token_pattern=____,
-        binary=____,
-        max_df=____,
-        min_df=____,
+    countVectorizer = CountVectorizer(
+        analyzer='word',
+        lowercase=True,
+        stop_words='english',
+        token_pattern=r"(?u)\b[a-zA-Z][a-zA-Z]+\b",
+        binary=True,
+        max_df=1.0, #FLOTANTE ES 100%
+        min_df=5,  #PALABRAS QUE AL MENOS ESTÉN 5 VECES EN LOS MENSAJES
     )
 
     # Cree un pipeline que contenga el CountVectorizer y el modelo de BernoulliNB.
-    pipeline = ____(
+    pipeline = Pipeline(
         steps=[
             ("____", ____),
             ("____", ____()),
