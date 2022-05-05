@@ -113,8 +113,8 @@ def pregunta_04():
         lowercase=True,
         stop_words='english',
         # token_pattern=r"(?u)\b\w\w+\b",
-        # token_pattern=r"(?u)\b[a-zA-Z][a-zA-Z]+\b",
-        token_pattern="[^0-9a-zA-Z]",
+        token_pattern=r"(?u)\b[a-zA-Z][a-zA-Z]+\b",
+        # token_pattern="[^0-9a-zA-Z]",
         binary=True,
         max_df=1.0, #FLOTANTE ES 100%
         min_df=5,  #PALABRAS QUE AL MENOS ESTÉN 5 VECES EN LOS MENSAJES
@@ -123,7 +123,7 @@ def pregunta_04():
     # Cree un pipeline que contenga el CountVectorizer y el modelo de BernoulliNB.
     pipeline = Pipeline(
         steps=[
-            ("CountVetorizer", CountVectorizer()),
+            ("countVectorizer", countVectorizer),
             ("MBernoulliNB", BernoulliNB()),
         ],
     )
@@ -160,7 +160,7 @@ def pregunta_05():
     """
 
     # Importe confusion_matrix
-    from ____ import ____
+    from sklearn.metrics import confusion_matrix
 
     # Obtenga el pipeline de la pregunta 3.
     gridSearchCV = pregunta_04()
@@ -169,14 +169,14 @@ def pregunta_05():
     X_train, X_test, y_train, y_test = pregunta_02()
 
     # Evalúe el pipeline con los datos de entrenamiento usando la matriz de confusion.
-    cfm_train = ____(
-        y_true=____,
-        y_pred=____.____(____),
+    cfm_train = confusion_matrix(
+        y_true=y_train,
+        y_pred=gridSearchCV.predict_proba(X_train.array()),
     )
 
-    cfm_test = ____(
-        y_true=____,
-        y_pred=____.____(____),
+    cfm_test = confusion_matrix(
+        y_true=y_test,
+        y_pred=gridSearchCV.predict_proba(X_test.array()),
     )
 
     # Retorne la matriz de confusion de entrenamiento y prueba
